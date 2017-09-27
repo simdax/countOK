@@ -8,6 +8,9 @@ var api =
 	    chat(args){
 		api.io.emit("blabla", args)
 	    },
+	    op(args){
+		console.log(args)
+	    },
 	    disconnect(args){
 		console.log("from : ", this.id)
 		console.log("bye")
