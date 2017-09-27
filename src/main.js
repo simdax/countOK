@@ -13,7 +13,7 @@ import router from './router'
 // }
 
 import m from 'vue-socket.io'
-Vue.use(m, 'http://localhost:8080')
+Vue.use(m, 'http://151.80.37.44:8080')
 
 Vue.config.productionTip = false
 
