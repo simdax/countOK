@@ -3,17 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import io from 'vue-socket.io'
 
-// import io from 'socket.io-client'
-// const socket = io('http://localhost:8080')
-// socket.on('connect', onConnect)
-// function onConnect(s)
-// {
-//     console.log('client connection', s)
-// }
-
-import m from 'vue-socket.io'
-Vue.use(m, 'http://151.80.37.44:8080')
+Vue.use(io, 'localhost:8080')
+//Vue.use(io, 'http://151.80.37.44:8080')
 
 Vue.config.productionTip = false
 

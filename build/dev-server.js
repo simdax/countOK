@@ -88,8 +88,10 @@ var io = require('socket.io')(server)
 var api = require('./api')
 io.on('connection', function (socket){
     console.log("connection au serveur", socket.id)
-    for (k in api) {
-	socket.on(k, api[k])
+    api.sockets.push(socket)
+    socket.emit('first', "today, you are the number : " + (api.g_connections += 1))
+    for (k in api.functions) {
+	socket.on(k, api.functions[k].bind(socket))
     }
 })
 
