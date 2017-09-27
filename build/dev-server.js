@@ -86,6 +86,7 @@ var server = app.listen(port)
 
 var io = require('socket.io')(server)
 var api = require('./api')
+api.io = io
 io.on('connection', function (socket){
     console.log("connection au serveur", socket.id)
     api.sockets.push(socket)

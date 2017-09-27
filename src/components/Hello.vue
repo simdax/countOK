@@ -4,14 +4,31 @@
       {{msg}}
     </div>
     <input @click="button" v-model="isIn" type="checkbox"/>
+    <input @keydown.13="$socket.emit('chat', chat); chat=''" v-model="chat" type="textarea"/>
+    <ul v-for="bla in blabla">
+      <li v-text="bla"></li>
+    </ul>
   </div>
 </template>
 
 <script>
     export default {
 	name: 'hello',
+	data () {
+	    return {
+		isIn: false,
+		msg: 'Bienvenue',
+		blabla: [],
+		chat: ''
+	    }
+	},	
 	sockets:{
-	    connect(){console.log("bienvenue")},
+	    connect(){},
+	    blabla(a){
+		this.blabla.push(a);
+		if(this.blabla.length > 10)
+		    {this.blabla.splice(0, 1)}
+	    },
 	    first(a){
 		this.msg = a;
 	    }
@@ -21,12 +38,6 @@
 		this.$socket.emit("button", this.isIn);    
 	    }
 	},
-	data () {
-	    return {
-		isIn: false,
-		msg: 'salut les loulous'
-	    }
-	}
     }
   </script>
 

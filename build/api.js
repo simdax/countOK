@@ -1,9 +1,13 @@
 var api =
     {
 	g_connections: 0,
+	blabla: [],
 	nb: [],
 	sockets: [],
 	functions: {
+	    chat(args){
+		api.io.emit("blabla", args)
+	    },
 	    disconnect(args){
 		console.log("from : ", this.id)
 		console.log("bye")
