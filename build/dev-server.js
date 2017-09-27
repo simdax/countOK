@@ -89,6 +89,8 @@ var api = require('./api')
 api.io = io
 io.on('connection', function (socket){
     console.log("connection au serveur", socket.id)
+    socket.ops = []
+    console.log(socket.ops)
     api.sockets.push(socket)
     socket.emit('first', "today, you are the number : " + (api.g_connections += 1))
     for (k in api.functions) {
