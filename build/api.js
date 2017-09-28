@@ -36,7 +36,8 @@ var api =
 		})
 		let win = res == args.to_find
 		let game = api.games.filter(g => { return g.id == args.id })[0]
-		this.emit('goTo', {res, win})
+		if (win) {this.wins += 1}
+		this.emit('goTo', {res, win, wins: this.wins})
 		this.broadcast.emit('goTo', {res, win: false})
 		game.numbers = []
 		game.init()

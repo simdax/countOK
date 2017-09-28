@@ -60,7 +60,7 @@
   </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss'>
+<style lang='scss' scoped>
 
 .game{
       display: flex column;
@@ -78,8 +78,9 @@
       font-size: 2em
   }
   input{
-      padding: 10px;
-      font-size: 2em;
+padding: 50px;
+      margin: 50px;
+      font-size: 10vw;
       border-radius: 30%;
       margin: 10px;
       &:nth-of-type(2){
