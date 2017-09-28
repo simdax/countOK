@@ -7,7 +7,10 @@
     <h2>YOU MUST FIND</h2>
     <p>{{to_find}}</p>
     <div class="buttons">
-      <input v-for="n in possible_ops" @click="$socket.emit('op',{op:n, nbs:numbers})" :value="n" type="button">
+      <div class="roundedOne" v-for="n in possible_ops">
+	<input @click="$socket.emit('op',{op:n, nbs:numbers, to_find})" type="button" :value='n'>
+	<label for="roundedOne"></label>
+      </div>
     </div>
     <input @click="$router.push({name:'Hello'})" value="I quit !" type="button">
   </div>
@@ -20,7 +23,7 @@
 	    return {
 		numbers: [],
 		ops: [],
-		possible_ops: ['+', '-', '*'],
+		possible_ops: ['+', '*', '-'],
 		to_find: 0,
 		size: 3,
 		to: 9
@@ -49,11 +52,6 @@
 		}
 	    }	    
 	},
-    	methods: {
-	    button() {
-		this.$socket.emit("button", this.isIn);
-	    }
-	},
     }
   </script>
 
@@ -76,6 +74,7 @@
       font-size: 2em
   }
   input{
+      padding: 10px;
       font-size: 2em;
       border-radius: 30%;
       margin: 10px;

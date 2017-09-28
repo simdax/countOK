@@ -1,10 +1,14 @@
 <template>
   <div class="hello">
+    <img src="../assets/logo.png">
     <h1> Bienvenue </h1>
     <p>{{msg}}</p>
-    <input @click="button" v-model="isIn" type="checkbox">
-    GO
-    </input>
+    <p>{{msg2}}</p>
+    <div class="roundedOne">
+      <input @click="button" v-model="isIn" type="checkbox">
+      <label for="roundedOne"></label>
+    </div>
+    <p>{{msg3}}</p>
     <input @keydown.13="$socket.emit('chat', chat); chat=''" v-model="chat" type="textarea"/>
     <div class="chat">
       <ul v-for="bla in blabla">
@@ -20,7 +24,9 @@
 	data () {
 	    return {
 		isIn: false,
-		msg: 'You can chat here. When you are ready, click the button left, and a game will start when we find 3 people wanting to play',
+		msg: 'Bienvenue',
+    msg2: 'Click the button, and a game will start when we find 3 people wanting to play',
+    msg3:'Here you can chat',
 		blabla: [],
 		chat: ''
 	    }
@@ -41,34 +47,41 @@
 	},
     	methods: {
 	    button() {
-		this.$socket.emit("button", this.isIn);    
+		this.$socket.emit("button", {isIn: this.isIn});    
 	    }
 	},
     }
 
-</script>
+    </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="./rounded.css">
-<style scoped>
-.chat{
-    height: 40vh
-}
-p{
-    font-size: 1.4em;
-    font: "Roboto"
-}
-  ul {
-  list-style-type: none;
-  padding: 0;
-  }
 
-  li {
-  display: inline-block;
-  margin: 0 10px;
-  }
+<style src="./rounded.css" />
+<style lang='scss' scoped>
+.roundedOne{
+	height: 10vh;
+	input{
+	    outline: none;
+	    transform: scale(2);
+	}
+    }
+    .chat{
+	height: 40vh;
+    }
+    p{
+	font-size: 1.4em;
+	font: "Roboto"
+    }
+    ul {
+	list-style-type: none;
+	padding: 0;
+    }
+    li {
+	display: inline-block;
+	margin: 0 10px;
+    }
 
-  a {
-  color: #42b983;
-  }
-</style>
+    a {
+	color: #42b983;
+    }
+    </style>

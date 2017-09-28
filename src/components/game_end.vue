@@ -1,6 +1,7 @@
 <template>
-  <div>   
-    {{ $route.params }}
+  <div>
+    {{ $route.params }},
+    {{msg}}
   </div>
 </template>
 
@@ -9,6 +10,11 @@
 	data() {
 	    return {
 		res: 0,
+	    }
+	},
+	computed:{
+	    msg(){
+		return this.$route.params.win ? "WIN" : "LOSE"
 	    }
 	},
 	mounted () {
