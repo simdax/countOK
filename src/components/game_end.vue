@@ -12,6 +12,12 @@
 		res: 0,
 	    }
 	},
+	sockets:{
+	    game(args){
+		console.log(4564)
+	    	this.$router.push({name: 'game', params:args})
+	    }
+	},
 	computed:{
 	    msg(){
 		return this.$route.params.win ? "WIN" : "LOSE"
@@ -19,7 +25,7 @@
 	},
 	mounted () {
 	    setTimeout(()=>{
-		this.$socket.emit("game", $route.params.id)
+		this.$socket.emit("go", {id: this.$route.params.id, regen:true})
 	    }, 1300)
 	}
     }

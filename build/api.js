@@ -28,17 +28,22 @@ var api =
 		api.io.emit("blabla", args)
 	    },
 	    op(args){
-		this.ops.push(args.op)
-		if(this.ops.length == 2)
-		{
-		    let res = args.nbs[0]
-		    this.ops.forEach((v,i) => {
-			let equation = `res ${v} ${args.nbs[i + 1]}`
-			res = eval(equation)
-		    })
-		    let win = res == args.to_find
-		    api.io.emit('goTo', {res, win})
-		}
+		let ops = args.ops
+		let res = args.numbers[0]
+		ops.forEach((v,i) => {
+		    let equation = `res ${v} ${args.numbers[i + 1]}`
+		    res = eval(equation)
+		})
+		let win = res == args.to_find
+		let game = api.games.filter(g => { return g.id == args.id })[0]
+		this.emit('goTo', {res, win})
+		this.broadcast.emit('goTo', {res, win: false})
+		game.numbers = []
+		game.init()
+		api.functions.for_those().forEach(s => {
+		    console.log("youyou", s.ops)
+		    s.ops = []
+		})
 	    },
 	    disconnect(args){
 		console.log("from : ", this.id)
@@ -50,9 +55,8 @@ var api =
 		    return api.nb.indexOf(socket.id) != -1
 		})
 	    },
-	    go(id){
-		let game = api.games.filter(g => { return g.id == id })
-		console.log(game)
+	    go(args){
+		let game = api.games.filter(g => { return g.id == args.id })[0]
 		this.emit("game", game)
 	    },
 	    button(args){
@@ -66,7 +70,7 @@ var api =
 		    api.games.push(game)
 		    api.functions.for_those()
 			.forEach(s => {
-			    api.functions.go.bind(s)(game.id)
+			    api.functions.go.bind(s)({id: game.id})
 			})
 		    api.nb = []
 		}

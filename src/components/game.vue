@@ -8,7 +8,7 @@
     <p>{{to_find}}</p>
     <div class="buttons">
       <div class="roundedOne" v-for="n in $route.params.possible_ops">
-	<input @click="$socket.emit('op',{op:n, nbs:numbers, to_find})" type="button" :value='n'>
+	<input @click="click(n)" type="button" :value='n'>
 	<label for="roundedOne"></label>
       </div>
     </div>
@@ -21,21 +21,37 @@
 	name: 'game',
 	data(){
 	    return {
+		clicks: [],
 	    	possible_ops: [],
 		numbers: [],
 		to_find: 0
+	    }
+	},
+	methods:{
+	    click(op){
+		this.clicks.push(op)
+		if (this.clicks.length == 2)
+		{
+		    this.$socket.emit('op', {
+			ops: this.clicks,
+			numbers: this.numbers,
+			to_find: this.to_find,
+			id: this.id
+		    })
+		}
 	    }
 	},
 	mounted(){
 	    this.possible_ops = ['+', '*', '-']
 	    this.numbers = this.$route.params.numbers
 	    this.to_find = this.$route.params.to_find
+	    this.id = this.$route.params.id
 	},
 	sockets:
 	{
 	    goTo (args) {
 		args.ok = (args.res == this.to_find)
-		args.id = $route.params.id
+		args.id = this.id
 		this.ops = []
 		this.$router.push({name:'stats', params: args})
 	    }

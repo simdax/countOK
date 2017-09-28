@@ -25,14 +25,13 @@
 	    return {
 		isIn: false,
 		msg: 'Bienvenue',
-		msg2: 'Click the button, and a game will start when we find 3 people wanting to play',
-		msg3:'Here you can chat',
+		msg2: 'A game will start when we\'ve find 3 people',
+		msg3:'Chat',
 		blabla: [],
 		chat: ''
 	    }
 	},	
 	sockets:{
-	    connect(){},
 	    blabla(a){
 		this.blabla.push(a);
 		if(this.blabla.length > 10)
