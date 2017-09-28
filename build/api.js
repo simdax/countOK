@@ -66,6 +66,7 @@ var api =
 		{ api.nb.push(this.id)}
 		else
 		{ api.nb.splice(api.nb.indexOf(this.id), 1)}
+		console.log(api.nb)
 		if(api.nb.length == api.gamers) {
 		    let game = new Game()
 		    api.games.push(game)
