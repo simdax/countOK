@@ -1,3 +1,5 @@
+var Game = require('./game')
+
 var api =
     {
 	g_connections: 0,
@@ -60,6 +62,7 @@ var api =
 			.forEach(v=>{
 			    v.emit("game")
 			})
+		    api.games.push(new Game)
 		    api.nb = []
 		}
 	    }
