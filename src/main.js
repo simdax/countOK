@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import io from 'vue-socket.io'
 
-Vue.use(io, 'localhost:8080')
-//Vue.use(io, 'http://151.80.37.44:8080')
+//Vue.use(io, 'localhost:8080')
+Vue.use(io, 'http://151.80.37.44:8080')
 
 Vue.config.productionTip = false
 

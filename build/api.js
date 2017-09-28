@@ -3,7 +3,7 @@ var Game = require('./game')
 var api =
     {
 	g_connections: 0,
-	gamers: 2,
+	gamers: 4,
 	blabla: [],
 	games: [],
 	nb: [],
@@ -22,7 +22,7 @@ var api =
 			this.equation = `${this.to_find} ${this.ops[i - 1]} ${this.numbers[i]}`
 			this.to_find = eval(this.equation)
 		    }
-		}	    
+		}
 	    },
 	    chat(args){
 		api.io.emit("blabla", args)
@@ -65,7 +65,10 @@ var api =
 		if(isIn)
 		{ api.nb.push(this.id)}
 		else
-		{ api.nb.splice(api.nb.indexOf(this.id), 1)}
+		{
+		let index = api.nb.indexOf(this.id)
+		if (index >= 0) {api.nb.splice(index,1)}
+		}
 		console.log(api.nb)
 		if(api.nb.length == api.gamers) {
 		    let game = new Game()
