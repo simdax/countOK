@@ -19,38 +19,26 @@
 <script>
     export default {
 	name: 'game',
-	data () {
+	data(){
 	    return {
+	    	possible_ops: [],
 		numbers: [],
-		ops: [],
-		possible_ops: ['+', '*', '-'],
-		to_find: 0,
-		size: 3,
-		to: 9
+		to_find: 0
 	    }
+	},
+	mounted(){
+	    this.possible_ops = ['+', '*', '-']
+	    this.numbers = this.$route.params.numbers
+	    this.to_find = this.$route.params.to_find
 	},
 	sockets:
 	{
 	    goTo (args) {
 		args.ok = (args.res == this.to_find)
+		args.id = $route.params.id
 		this.ops = []
 		this.$router.push({name:'stats', params: args})
 	    }
-	},
-	mounted(){
-	    for(var i = 0; i < this.size; i++)
-	    {
-		this.numbers.push(Math.ceil(Math.random() * this.to))
-		if(i == 0)
-		{this.to_find = this.numbers[i]}
-		else
-		{
-		    let op = Math.floor(Math.random() * this.possible_ops.length)
-		    this.ops.push(this.possible_ops[op])
-		    this.equation = `${this.to_find} ${this.ops[i - 1]} ${this.numbers[i]}`
-		    this.to_find = eval(this.equation)
-		}
-	    }	    
 	},
     }
   </script>

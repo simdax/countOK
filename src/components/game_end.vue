@@ -19,7 +19,7 @@
 	},
 	mounted () {
 	    setTimeout(()=>{
-		this.$router.push({name:'game'})
+		this.$socket.emit("game", $route.params.id)
 	    }, 1300)
 	}
     }

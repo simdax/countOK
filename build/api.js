@@ -28,7 +28,6 @@ var api =
 		api.io.emit("blabla", args)
 	    },
 	    op(args){
-		console.log(api)
 		this.ops.push(args.op)
 		if(this.ops.length == 2)
 		{
@@ -46,27 +45,32 @@ var api =
 		console.log("bye")
 		api.nb.splice(api.nb.indexOf(this.id), 1)
 	    },
+	    for_those(cb){
+	    	return api.sockets.filter(socket=>{
+		    return api.nb.indexOf(socket.id) != -1
+		})
+	    },
+	    go(id){
+		let game = api.games.filter(g => { return g.id == id })
+		console.log(game)
+		this.emit("game", game)
+	    },
 	    button(args){
 		let isIn = args.isIn
-		console.log("from : ", this.id)
 		if(isIn)
 		{ api.nb.push(this.id)}
 		else
 		{ api.nb.splice(api.nb.indexOf(this.id), 1)}
-		console.log(args)
 		if(api.nb.length == api.gamers) {
-		    let rand = Math.random() * 10 % 10
-		    api.sockets.filter(socket=>{
-			return api.nb.indexOf(socket.id) != -1
-		    })
-			.forEach(v=>{
-			    v.emit("game")
+		    let game = new Game()
+		    api.games.push(game)
+		    api.functions.for_those()
+			.forEach(s => {
+			    api.functions.go.bind(s)(game.id)
 			})
-		    api.games.push(new Game)
 		    api.nb = []
 		}
 	    }
 	}
     }
-
 module.exports = api

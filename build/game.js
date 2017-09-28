@@ -1,12 +1,13 @@
-function Game (size = 3, to = 9) {
+function Game (sockets, size = 3, to = 9) {
     this.id = Game.ids + 1
+    this.sockets = sockets
     this.numbers = []
     this.ops = []
     this.possible_ops = ['+', '*', '-']
     this.to_find = 0
     this.size = size
     this.to = to
-    this.init
+    this.init()
 }
 Game.prototype = {
     init(){
@@ -23,6 +24,9 @@ Game.prototype = {
 		this.to_find = eval(this.equation)
 	    }
 	}	    
+    },
+    go(){
+	
     }
 }
 Game.ids = 0

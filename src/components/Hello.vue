@@ -25,8 +25,8 @@
 	    return {
 		isIn: false,
 		msg: 'Bienvenue',
-    msg2: 'Click the button, and a game will start when we find 3 people wanting to play',
-    msg3:'Here you can chat',
+		msg2: 'Click the button, and a game will start when we find 3 people wanting to play',
+		msg3:'Here you can chat',
 		blabla: [],
 		chat: ''
 	    }
@@ -38,8 +38,8 @@
 		if(this.blabla.length > 10)
 		{this.blabla.splice(0, 1)}
 	    },
-	    game(){
-		this.$router.push('game')
+	    game(args){
+		this.$router.push({name: 'game', params:args})
 	    },
 	    first(a){
 		this.msg = a;
