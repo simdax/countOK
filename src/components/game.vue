@@ -1,13 +1,13 @@
 <template>
   <div class="game">
-    <p>WITH THIS NUMBERS</p>
-    <div v-for="n in numbers">
+    <h1>WITH THESE NUMBERS</h1>
+    <p v-for="n in numbers">
       {{n}}
-    </div>
-    <p>YOU MUST FIND</p>
+    </p>
+    <h2>YOU MUST FIND</h2>
     <p>{{to_find}}</p>
-    <div v-for="n in possible_ops">
-      <input @click="$socket.emit('op',{op:n, nbs:numbers})" :value="n" type="button">
+    <div class="buttons">
+      <input v-for="n in possible_ops" @click="$socket.emit('op',{op:n, nbs:numbers})" :value="n" type="button">
     </div>
     <input @click="$router.push({name:'Hello'})" value="I quit !" type="button">
   </div>
@@ -58,22 +58,31 @@
   </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-      font-weight: normal;
+<style lang='scss'>
+
+.game{
+      display: flex column;
+      justify-content: space-between
   }
 
-  ul {
-      list-style-type: none;
-      padding: 0;
+.buttons
+{
+    height: 10vh;
+    width: 50vw;
+    display: flex;
+    justify-content: space-evenly;
   }
+  p{
+      font-size: 2em
+  }
+  input{
+      font-size: 2em;
+      border-radius: 30%;
+      margin: 10px;
+      &:nth-of-type(2){
+	  self-align: center
+      }
+  }
+  
 
-  li {
-      display: inline-block;
-      margin: 0 10px;
-  }
-
-  a {
-      color: #42b983;
-  }
-  </style>
+</style>

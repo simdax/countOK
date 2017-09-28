@@ -1,13 +1,16 @@
 <template>
   <div class="hello">
-    <div>
-      {{msg}}
-    </div>
-    <input @click="button" v-model="isIn" type="checkbox"/>
+    <h1> Bienvenue </h1>
+    <p>{{msg}}</p>
+    <input @click="button" v-model="isIn" type="checkbox">
+    GO
+    </input>
     <input @keydown.13="$socket.emit('chat', chat); chat=''" v-model="chat" type="textarea"/>
-    <ul v-for="bla in blabla">
-      <li v-text="bla"></li>
-    </ul>
+    <div class="chat">
+      <ul v-for="bla in blabla">
+	<li v-text="bla"></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -17,7 +20,7 @@
 	data () {
 	    return {
 		isIn: false,
-		msg: 'Bienvenue',
+		msg: 'You can chat here. When you are ready, click the button left, and a game will start when we find 3 people wanting to play',
 		blabla: [],
 		chat: ''
 	    }
@@ -46,11 +49,15 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<style src="./rounded.css">
 <style scoped>
-  h1, h2 {
-  font-weight: normal;
-  }
-
+.chat{
+    height: 40vh
+}
+p{
+    font-size: 1.4em;
+    font: "Roboto"
+}
   ul {
   list-style-type: none;
   padding: 0;
