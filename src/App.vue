@@ -5,28 +5,32 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
-</script>
+    export default {
+	name: 'app'
+    }
+  </script>
 
 <style>
-img{
-    height: 20vh
-}
-html, body, #app{
-    height: 100vh
-}
-#app {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-  </style>
+
+  input[type=button]{
+      outline: none
+  }
+  img{
+      height: 20vh
+  }
+  html, body{
+      margin: 0;
+      height: 95vh
+  }
+  #app {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      color: #2c3e50;
+  }
+</style>

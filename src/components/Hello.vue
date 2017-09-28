@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <img src="../assets/logo.png">
+    <img src="../assets/pi.jpg">
     <h1> Bienvenue </h1>
     <p>{{msg}}</p>
     <p>{{msg2}}</p>
@@ -11,7 +11,7 @@
     <p>{{msg3}}</p>
     <input @keydown.13="$socket.emit('chat', chat); chat=''" v-model="chat" type="textarea"/>
     <div class="chat">
-      <ul v-for="bla in blabla">
+      <ul v-for="bla in blablaRev">
 	<li v-text="bla"></li>
       </ul>
     </div>
@@ -49,9 +49,14 @@
 		this.$socket.emit("button", {isIn: this.isIn});    
 	    }
 	},
+	computed: {
+	    blablaRev(){
+		return this.blabla.reverse()
+	    }
+	},
     }
 
-    </script>
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 

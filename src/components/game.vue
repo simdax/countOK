@@ -1,6 +1,7 @@
 <template>
   <div class="game">
     <h1>WITH THESE NUMBERS</h1>
+    <h1>IN THIS ORDER</h1>
     <p v-for="n in $route.params.numbers">
       {{n}}
     </p>
@@ -63,29 +64,21 @@
 <style lang='scss' scoped>
 
 .game{
-      display: flex column;
-      justify-content: space-between
-  }
 
-.buttons
-{
-    height: 10vh;
-    width: 50vw;
-    display: flex;
-    justify-content: space-evenly;
+  }
+  .buttons
+  {
+      display: flex;
+      justify-content: space-evenly;
   }
   p{
-      font-size: 2em
+      font-size: 1em
   }
   input{
-padding: 50px;
-      margin: 50px;
-      font-size: 10vw;
-      border-radius: 30%;
+      font-size: 2em;
       margin: 10px;
-      &:nth-of-type(2){
-	  self-align: center
-      }
+      padding: 15px 30px;
+      border-radius: 44%;
   }
   
 

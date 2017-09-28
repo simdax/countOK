@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p>
-    {{msg}}
-    <p/>
+    <h1>
+      {{msg}}
+    </h1>
     <p v-if="$route.params.wins">
       You won {{$route.params.wins}} times
-    <p/>
+    </p>
   </div>
 </template>
 
