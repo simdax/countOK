@@ -6,24 +6,9 @@ var api =
 	gamers: 2,
 	blabla: [],
 	games: [],
-	nb: [],
+	queue: [],
 	sockets: [],
 	functions: {
-	    generate_numbers(){
-		for(var i = 0; i < this.size; i++)
-		{
-		    this.numbers.push(Math.ceil(Math.random() * this.to))
-		    if(i == 0)
-		    {this.to_find = this.numbers[i]}
-		    else
-		    {
-			let op = Math.floor(Math.random() * this.possible_ops.length)
-			this.ops.push(this.possible_ops[op])
-			this.equation = `${this.to_find} ${this.ops[i - 1]} ${this.numbers[i]}`
-			this.to_find = eval(this.equation)
-		    }
-		}	    
-	    },
 	    chat(args){
 		api.io.emit("blabla", args)
 	    },
@@ -36,24 +21,32 @@ var api =
 		})
 		let win = res == args.to_find
 		let game = api.games.filter(g => { return g.id == args.id })[0]
-		if (win) {this.wins += 1}
+		if (win) {
+		    this.wins += 1
+		    this.score += 1
+		}
+		else {
+		    this.score -= 1
+		}
 		this.emit('goTo', {res, win, wins: this.wins})
 		this.broadcast.emit('goTo', {res, win: false})
-		game.numbers = []
-		game.init()
+		api.io.emit('score', api.functions.for_those().forEach(s => {
+		    console.log(s.id, s.score)
+		    return {name: s.id, score: s.score}
+		}))
 		api.functions.for_those().forEach(s => {
-		    console.log("youyou", s.ops)
 		    s.ops = []
 		})
+		game.init()
 	    },
 	    disconnect(args){
 		console.log("from : ", this.id)
 		console.log("bye")
-		api.nb.splice(api.nb.indexOf(this.id), 1)
+		api.queue.splice(api.queue.indexOf(this.id), 1)
 	    },
 	    for_those(cb){
 	    	return api.sockets.filter(socket=>{
-		    return api.nb.indexOf(socket.id) != -1
+		    return api.queue.indexOf(socket.id) != -1
 		})
 	    },
 	    go(args){
@@ -63,18 +56,20 @@ var api =
 	    button(args){
 		let isIn = args.isIn
 		if(isIn)
-		{ api.nb.push(this.id)}
+		{ api.queue.push(this.id)}
 		else
-		{ api.nb.splice(api.nb.indexOf(this.id), 1)}
-		console.log(api.nb)
-		if(api.nb.length == api.gamers) {
+		{
+		    let index = api.queue.indexOf(this.id)
+		    if(index >= 0) {api.queue.splice(index, 1)}
+		}
+		if(api.queue.length == api.gamers) {
 		    let game = new Game()
 		    api.games.push(game)
 		    api.functions.for_those()
 			.forEach(s => {
 			    api.functions.go.bind(s)({id: game.id})
 			})
-		    api.nb = []
+		    api.queue = []
 		}
 	    }
 	}
