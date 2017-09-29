@@ -3,7 +3,7 @@ var Game = require('./game')
 var api =
     {
 	g_connections: 0,
-	gamers: 2,
+	gamers: 4,
 	blabla: [],
 	games: [],
 	queue: [],
@@ -62,6 +62,7 @@ var api =
 		    let index = api.queue.indexOf(this.id)
 		    if(index >= 0) {api.queue.splice(index, 1)}
 		}
+		console.log(api.queue)
 		if(api.queue.length == api.gamers) {
 		    let game = new Game()
 		    api.games.push(game)
