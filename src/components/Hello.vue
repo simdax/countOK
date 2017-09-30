@@ -5,7 +5,7 @@
     <p>{{msg}}</p>
     <p>{{msg2}}</p>
     <div class="roundedOne">
-      <input @click="button" v-model="isIn" type="checkbox">
+      <input @click="button($event)" v-model="isIn" type="checkbox">
       <label for="roundedOne"></label>
     </div>
     <p>{{msg3}}</p>
@@ -34,8 +34,10 @@
 	sockets:{
 	    blabla(a){
 		this.blabla.push(a);
-		if(this.blabla.length > 10)
-		{this.blabla.splice(0, 1)}
+		if (this.blabla.length > 10)
+		{
+		    this.blabla.splice(0, 1)
+		}
 	    },
 	    game(args){
 		this.$router.push({name: 'game', params:args})
@@ -45,7 +47,7 @@
 	    }
 	},
     	methods: {
-	    button() {
+	    button(ev) {
 		this.$socket.emit("button", {isIn: this.isIn});    
 	    }
 	},
